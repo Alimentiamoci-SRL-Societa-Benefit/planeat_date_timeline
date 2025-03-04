@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  planeat: alimentiamoci/planeat-app-orb@0.2.4
+
+only-release-tags: &only-release-tags
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      only: /.*/
+
+fingerprint: &fingerprint
+  fingerprint: "SHA256:6LKwlyYRnMBvrpqBIw2M4kSf4w93k7iAv4U17CsZ4QE"
+
+workflows:
+  publish:
+    jobs:
+      - planeat/notify_start:
+          <<: *only-release-tags
+          context:
+            - slack
+      - planeat/publish:
+          <<: *only-release-tags
+          <<: *fingerprint
+          context:
+            - slack
+            - onepub
+          requires:
+            - planeat/notify_start
