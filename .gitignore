@@ -31,3 +31,7 @@ build/
 
 # FVM Version Cache
 .fvm/
+
+# other to ignore
+.scripts
+.idea
