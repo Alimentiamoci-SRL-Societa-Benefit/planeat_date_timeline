@@ -49,6 +49,47 @@ void main() {
       expect(find.byType(EasyDayWidget), findsExactly(7));
     });
 
+    testWidgets('Renders correctly with show weekend props to false',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        TestableWidget(
+          child: InfiniteTimeLineWidget(
+            firstDate: DateTime(2025, 3, 1),
+            lastDate: DateTime(2025, 3, 7),
+            focusedDate: DateTime(2025, 3, 3),
+            showWeekends: false,
+            activeDayTextColor: Colors.black,
+            activeDayColor: Colors.blue,
+            selectionMode: const SelectionMode.autoCenter(),
+          ),
+        ),
+      );
+      expect(find.byType(InfiniteTimeLineWidget), findsOneWidget);
+
+      // Find the Scrollable
+      final listViewFinder = find.descendant(
+        of: find.byType(CustomScrollView),
+        matching: find.byType(Scrollable),
+      );
+
+      // Find the last Container in the list
+      final lastEasyDayFinder = find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is EasyDayWidget && widget.date == DateTime(2025, 3, 7),
+      );
+
+      // Scroll through the list until the last EasyDayWidget is visible
+      await tester.scrollUntilVisible(
+          lastEasyDayFinder, (5 * EasyConstants.dayWidgetHeight),
+          scrollable: listViewFinder);
+      await tester.pumpAndSettle();
+      expect(find.byType(InfiniteTimeLineWidget), findsOneWidget);
+      expect(find.byType(CustomScrollView), findsOneWidget);
+      expect(find.byType(SliverFixedExtentList), findsOneWidget);
+      expect(find.byType(InfiniteTimeLineWidget), findsOneWidget);
+      expect(find.byType(EasyDayWidget), findsExactly(5));
+    });
+
     testWidgets('Calls onDateChange callback when a day is pressed',
         (WidgetTester tester) async {
       DateTime? selectedDate;
