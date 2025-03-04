@@ -1,6 +1,6 @@
 name: planeat_date_timeline
 description: The Planeat for of "easy_date_timeline" package
-version: 2.1.2
+version: 2.1.3
 publish_to: https://onepub.dev/api/usyavuhnof/
 
 environment:
