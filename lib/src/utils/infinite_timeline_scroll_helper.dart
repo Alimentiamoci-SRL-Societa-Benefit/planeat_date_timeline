@@ -40,7 +40,8 @@ final class InfiniteTimelineScrollHelper {
   /// scroll extent, the maximum scroll extent is returned instead.
   double getScrollPositionForFirstDate(List<DateTime> days) {
     // Calculate the number of days between the first and last dates
-    final dayIndex = days.indexOf(lastDate);
+    final dayIndex =
+        days.indexOf(DateTime(lastDate.year, lastDate.month, lastDate.day));
 
     // Calculate the target scroll position to place the first date at the
     // leftmost position
@@ -63,7 +64,8 @@ final class InfiniteTimelineScrollHelper {
   /// Returns the scroll position to center the date.
   double getScrollPositionForCenterDate(List<DateTime> days) {
     // Calculate the number of days between the first and last dates
-    final dayIndex = days.indexOf(lastDate);
+    final dayIndex =
+        days.indexOf(DateTime(lastDate.year, lastDate.month, lastDate.day));
 
     // Calculate the half of the screen width
     final halfScreenWidth = screenWidth / 2;

@@ -1,5 +1,5 @@
-import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 
 class VerticalExample extends StatefulWidget {
   const VerticalExample({super.key});
@@ -40,14 +40,14 @@ class _VerticalExampleState extends State<VerticalExample> {
           child: EasyInfiniteDateTimeLine(
             controller: _controller,
             firstDate: DateTime(2024, 1, 1),
-            lastDate: DateTime(2025, 1, 1),
+            lastDate: DateTime(2026, 1, 1),
+            focusDate: _selectedDate,
             showTimelineHeader: false,
             dayProps: EasyDayProps(
               landScapeMode: true,
               height: 40,
             ),
             selectionMode: SelectionModeAutoCenter(),
-            focusDate: _selectedDate,
             onDateChange: (selectedDate) {
               setState(() {
                 _selectedDate = selectedDate;
