@@ -30,6 +30,7 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
   /// - [locale]: A `String` that represents the locale code to use for formatting the dates in the timeline.
   /// - [controller]: The controller to manage the EasyInfiniteDateTimeline.
   /// - [showTimelineHeader]: Represents whether the timeline header should be displayed or not.
+  /// - [showWeekends]: Determines if showing weekend days in timeline
   /// - [headerBuilder]: The callback function used to build the header of the infinite date timeline.
   /// - [autoCenter]: Automatically centers the selected day in the timeline.
   ///
@@ -49,6 +50,7 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
   ///   locale: "en_US",
   ///   controller: EasyInfiniteDateTimelineController(),
   ///   showTimelineHeader: true,
+  ///   showWeekends: true,
   /// )
   /// ```
   const EasyInfiniteDateTimeLine({
@@ -62,6 +64,7 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
     this.locale = "en_US",
     this.controller,
     this.showTimelineHeader = true,
+    this.showWeekends = true,
     this.headerBuilder,
     this.selectionMode = const SelectionMode.autoCenter(),
     this.physics,
@@ -124,6 +127,9 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
 
   /// Represents whether the timeline header should be displayed or not.
   final bool showTimelineHeader;
+
+  /// Represents whether the weekend days should be displayed or not.
+  final bool showWeekends;
 
   /// The callback function used to build the header of the infinite date timeline.
   ///
@@ -207,6 +213,7 @@ class _EasyInfiniteDateTimeLineState extends State<EasyInfiniteDateTimeLine> {
           onDateChange: widget.onDateChange,
           timeLineProps: widget.timeLineProps,
           dayProps: widget.dayProps,
+          showWeekends: widget.showWeekends,
           itemBuilder: widget.itemBuilder,
           activeDayTextColor: activeDayTextColor,
           activeDayColor: activeDayColor,

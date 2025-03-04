@@ -17,6 +17,7 @@ class InfiniteTimeLineWidget extends StatefulWidget {
     this.locale = "en_US",
     this.timeLineProps = const EasyTimeLineProps(),
     this.onDateChange,
+    this.showWeekends = true,
     this.itemBuilder,
     this.physics,
     this.controller,
@@ -72,6 +73,9 @@ class InfiniteTimeLineWidget extends StatefulWidget {
   /// This function takes a `DateTime` object as its parameter, which represents the new selected date.
   final OnDateChangeCallBack? onDateChange;
 
+  /// Determines if showing weekend days or not
+  final bool showWeekends;
+
   /// Called for each day in the timeline, allowing the developer to customize the appearance and behavior of each day widget.
   /// This function takes a `BuildContext` and a `DateTime` object as its parameters, and should return a `Widget` that represents the day.
   final ItemBuilderCallBack? itemBuilder;
@@ -119,8 +123,8 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
   /// Returns the height of a single day in the timeline.
   double get _dayHeight => _dayProps.height;
 
-  /// The number of days in the timeline.
-  late int _daysCount;
+  /// Days in the timeline.
+  late List<DateTime> _days;
 
   /// Scroll controller for the infinite timeline widget.
   late ScrollController _controller;
@@ -137,8 +141,11 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
     super.initState();
     _initItemExtend();
     _attachEasyController();
-    _daysCount =
-        EasyDateUtils.calculateDaysCount(widget.firstDate, widget.lastDate);
+    _days = EasyDateUtils.getDateTimesInBetween(
+      startDate: widget.firstDate,
+      endDate: widget.lastDate,
+      showWeekends: widget.showWeekends,
+    );
     _controller = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) => _jumpToInitialOffset());
   }
@@ -219,7 +226,7 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
                   ///
                   /// The [firstDate] is the starting date from which the duration is added.
                   /// The [index] represents the number of days to be added to the [firstDate].
-                  final currentDate = widget.firstDate.addDays(index);
+                  final currentDate = _days[index];
 
                   /// Checks if the [_focusDate] is the same day as [currentDate].
                   final isSelected =
@@ -262,7 +269,7 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
                           ),
                   );
                 },
-                itemCount: _daysCount,
+                itemCount: _days.length,
               ),
             ),
           ],
@@ -327,10 +334,10 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
         // If the selection mode is none or always first
         SelectionModeNone() ||
         SelectionModeAlwaysFirst() =>
-          scrollHelper.getScrollPositionForFirstDate(),
+          scrollHelper.getScrollPositionForFirstDate(_days),
         // If the selection mode is auto center
         SelectionModeAutoCenter() =>
-          scrollHelper.getScrollPositionForCenterDate(),
+          scrollHelper.getScrollPositionForCenterDate(_days),
       };
     } else {
       // If no date is provided, return 0.0 as the scroll offset

@@ -62,4 +62,27 @@ abstract class EasyDateUtils {
             .round() +
         1;
   }
+
+  /// Calculates the DateTimes in range considering if showing or not weekend days
+  static List<DateTime> getDateTimesInBetween({
+    required DateTime startDate,
+    required DateTime endDate,
+    required bool showWeekends,
+  }) {
+    final days = <DateTime>[];
+    for (var i = 0; i <= endDate.difference(startDate).inDays; i++) {
+      final date = startDate.add(Duration(days: i));
+
+      days.add(date);
+    }
+
+    if (!showWeekends) {
+      days.removeWhere(
+        (day) =>
+            day.weekday == DateTime.sunday || day.weekday == DateTime.saturday,
+      );
+    }
+
+    return days;
+  }
 }
