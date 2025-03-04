@@ -11,7 +11,7 @@ only-release-tags: &only-release-tags
       only: /.*/
 
 fingerprint: &fingerprint
-  fingerprint: "SHA256:6LKwlyYRnMBvrpqBIw2M4kSf4w93k7iAv4U17CsZ4QE"
+  fingerprint: "SHA256:uZmd4PjO/74dET53wPDnVr1lV2bw9C+acbomNjoQ614"
 
 workflows:
   publish:
