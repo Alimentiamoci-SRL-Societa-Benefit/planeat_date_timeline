@@ -36,7 +36,7 @@ class _VerticalExampleState extends State<VerticalExample> {
         ),
         const SizedBox(height: 32),
         SizedBox(
-          width: 200,
+          width: 300,
           child: EasyInfiniteDateTimeLine(
             controller: _controller,
             firstDate: DateTime(2024, 1, 1),
@@ -44,6 +44,7 @@ class _VerticalExampleState extends State<VerticalExample> {
             focusDate: _selectedDate,
             showTimelineHeader: false,
             dayProps: EasyDayProps(
+              dayStructure: DayStructure.expandedDayStrDayNumMonth,
               landScapeMode: true,
               height: 40,
             ),
@@ -54,7 +55,7 @@ class _VerticalExampleState extends State<VerticalExample> {
               });
             },
             verticalView: true,
-            verticalHeight: 200,
+            verticalHeight: 300,
           ),
         ),
         const SizedBox(height: 16.0),

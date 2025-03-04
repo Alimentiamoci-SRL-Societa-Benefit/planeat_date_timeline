@@ -1,5 +1,5 @@
-import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 
 import '../../utils/utils.dart';
 import 'day_info_text.dart';
@@ -254,6 +254,44 @@ class EasyDayWidget extends StatelessWidget {
     );
   }
 
+  /// Builds a `DayInfoText` widget for the month expanded.
+  ///
+  /// This method returns a `DayInfoText` widget that displays the short name of the month of the current date, in uppercase.
+  /// The `textStyle` property of the widget is determined based on the `isSelected` boolean value and the `easyDayProps` object.
+  DayInfoText _buildFullMonth(bool isToday) {
+    //TODO: remove `easyDayProps.activeMothStrStyle` because it is deprecated.
+    final activeMothStrStyle = _activeDayStyle.monthStrStyle ??
+        easyDayProps.activeMothStrStyle ??
+        EasyTextStyles.monthStrStyle.copyWith(
+          color: activeTextColor,
+        );
+    //TODO: remove `easyDayProps.inactiveMothStrStyle` because it is deprecated.
+    final inactiveMothStrStyle = _inactiveDayStyle.monthStrStyle ??
+        easyDayProps.inactiveMothStrStyle ??
+        EasyTextStyles.monthStrStyle;
+    //TODO: remove `easyDayProps.todayMonthStrStyle` because it is deprecated.
+    final todayMonthStrStyle = _todayStyle.monthStrStyle ??
+        easyDayProps.todayMonthStrStyle ??
+        EasyTextStyles.monthStrStyle;
+
+    final disabledMonthStrStyle = _disabledDayStyle.monthStrStyle ??
+        EasyTextStyles.monthStrStyle.copyWith(
+          color: EasyColors.disabledDayColor,
+        );
+    TextStyle monthStyle = inactiveMothStrStyle;
+    if (isSelected) {
+      monthStyle = activeMothStrStyle;
+    } else if (isDisabled) {
+      monthStyle = disabledMonthStrStyle;
+    } else if (isToday) {
+      monthStyle = todayMonthStrStyle;
+    }
+    return ExpandedDayInfoText(
+      text: EasyDateFormatter.fullMonthName(date, locale).toUpperCase(),
+      textStyle: monthStyle,
+    );
+  }
+
   /// Builds a `DayInfoText` widget for the day number.
   ///
   /// This method returns a `DayInfoText` widget that displays the day number of the current date.
@@ -329,6 +367,44 @@ class EasyDayWidget extends StatelessWidget {
     );
   }
 
+  /// Builds a `DayInfoText` widget for the day expanded.
+  ///
+  /// This method returns a `DayInfoText` widget that displays the day of the current date.
+  /// The `textStyle` property of the widget is determined based on the `isSelected` boolean value and the `easyDayProps` object.
+
+  DayInfoText _buildFullDayString(bool isToday) {
+    //TODO: remove `easyDayProps.activeDayStrStyle` because it is deprecated.
+    final activeDayStrStyle = _activeDayStyle.dayStrStyle ??
+        easyDayProps.activeDayStrStyle ??
+        EasyTextStyles.dayStrStyle.copyWith(
+          color: activeTextColor,
+        );
+    //TODO: remove `easyDayProps.inactiveDayStrStyle` because it is deprecated.
+    final inactiveDayStrStyle = _inactiveDayStyle.dayStrStyle ??
+        easyDayProps.inactiveDayStrStyle ??
+        EasyTextStyles.dayStrStyle;
+    //TODO: remove `easyDayProps.disabledDayStrStyle` because it is deprecated.
+    final todayStrStyle = _todayStyle.dayStrStyle ??
+        easyDayProps.todayStrStyle ??
+        EasyTextStyles.dayStrStyle;
+    final disabledStrStyle = _disabledDayStyle.dayStrStyle ??
+        EasyTextStyles.dayStrStyle.copyWith(
+          color: EasyColors.disabledDayColor,
+        );
+    TextStyle dayStrStyle = inactiveDayStrStyle;
+    if (isSelected) {
+      dayStrStyle = activeDayStrStyle;
+    } else if (isDisabled) {
+      dayStrStyle = disabledStrStyle;
+    } else if (isToday) {
+      dayStrStyle = todayStrStyle;
+    }
+    return ExpandedDayInfoText(
+      text: EasyDateFormatter.fullDayName(date, locale).toUpperCase(),
+      textStyle: dayStrStyle,
+    );
+  }
+
   /// Builds the structure of a day widget based on the provided `DayStructure`.
   ///
   /// `structure` is an enum value that represents the structure to use for the day widget.
@@ -373,6 +449,13 @@ class EasyDayWidget extends StatelessWidget {
           _buildDayString(isToday),
           _buildDayNumber(isToday),
           _buildMonth(isToday),
+        ];
+        break;
+      case DayStructure.expandedDayStrDayNumMonth:
+        items = [
+          _buildFullDayString(isToday),
+          _buildDayNumber(isToday),
+          _buildFullMonth(isToday),
         ];
         break;
       default:

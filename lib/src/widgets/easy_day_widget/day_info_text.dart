@@ -28,3 +28,26 @@ class DayInfoText extends StatelessWidget {
     );
   }
 }
+
+/// A widget that displays a text string with an optional text style.
+class ExpandedDayInfoText extends DayInfoText {
+  const ExpandedDayInfoText({
+    super.key,
+    required super.text,
+    super.textStyle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: FittedBox(
+        alignment: Alignment.center,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          text,
+          style: textStyle,
+        ),
+      ),
+    );
+  }
+}

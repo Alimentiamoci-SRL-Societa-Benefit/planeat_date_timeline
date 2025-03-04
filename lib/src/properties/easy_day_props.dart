@@ -164,6 +164,9 @@ enum DayStructure {
   /// Displays the day of the week abbreviated name, the day of the month, and the month abbreviated name. Example: "Mon 14 Sep".
   dayStrDayNumMonth,
 
+  /// Displays the day of the week expanded name, the day of the month, and the month abbreviated name. Example: "Monday 14 September".
+  expandedDayStrDayNumMonth,
+
   /// Displays the day of the month and the day of the week abbreviated name. Example: "14 Mon".
   dayNumDayStr,
 
