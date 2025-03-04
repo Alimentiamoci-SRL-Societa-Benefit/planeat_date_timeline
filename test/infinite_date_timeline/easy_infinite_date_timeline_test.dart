@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/easy_infinite_date_time/easy_infinite_date_timeline.dart';
+import 'package:planeat_date_timeline/src/easy_infinite_date_time/easy_infinite_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

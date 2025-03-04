@@ -1,6 +1,6 @@
-import 'package:easy_date_timeline/src/utils/utils.dart';
 import 'package:flutter/material.dart';
-import '../sealed_classes/sealed_classes.exports.dart';
+import 'package:planeat_date_timeline/src/easy_date_time_line_picker/easy_date_time_line_picker.exports.dart';
+import 'package:planeat_date_timeline/src/utils/utils.dart';
 
 /// A mixin that provides infinite timeline scrolling functionality
 /// for ScrollController implementations.

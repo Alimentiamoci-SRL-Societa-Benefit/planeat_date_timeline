@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/utils/easy_date_utils.dart';
+import 'package:planeat_date_timeline/src/utils/easy_date_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

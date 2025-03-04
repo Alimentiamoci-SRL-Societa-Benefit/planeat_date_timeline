@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 import 'package:flutter/material.dart';
 
 class ThemingExample extends StatefulWidget {

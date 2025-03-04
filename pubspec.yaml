@@ -3,13 +3,6 @@ description: The Planeat for of "easy_date_timeline" package
 version: 2.1.0
 publish_to: https://onepub.dev/api/usyavuhnof/
 
-topics:
-  - calendar
-  - picker
-  - widgets
-  - timeline
-  - date-time
-
 environment:
   sdk: ">=3.0.2 <4.0.0"
   flutter: ">=1.17.0"

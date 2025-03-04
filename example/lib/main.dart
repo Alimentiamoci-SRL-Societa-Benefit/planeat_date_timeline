@@ -1,9 +1,9 @@
-import 'package:easy_date_timeline/easy_date_timeline.dart';
-import 'package:example/examples/vertical_example.dart';
 import 'package:flutter/material.dart';
+import 'package:planeat_date_timeline/planeat_date_timeline.dart';
 
 import 'examples/simple_use_date_picker.dart';
 import 'examples/theming_example.dart';
+import 'examples/vertical_example.dart';
 
 void main() {
   runApp(const MyApp());

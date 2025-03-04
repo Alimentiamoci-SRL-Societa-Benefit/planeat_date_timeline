@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/easy_date_time_line_picker/utils/constants.dart';
+import 'package:planeat_date_timeline/src/easy_date_time_line_picker/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../sealed_classes/sealed_classes.exports.dart';

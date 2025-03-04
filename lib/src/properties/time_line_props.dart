@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/utils/easy_constants.dart';
+import 'package:planeat_date_timeline/src/utils/easy_constants.dart';
 import 'package:flutter/material.dart' show Color, EdgeInsets, BoxDecoration;
 
 final class EasyTimeLineProps {

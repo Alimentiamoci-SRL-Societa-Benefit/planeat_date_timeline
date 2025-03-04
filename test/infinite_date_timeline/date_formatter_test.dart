@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/properties/date_formatter.dart';
+import 'package:planeat_date_timeline/src/properties/date_formatter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:easy_date_timeline/src/utils/utils.dart';
+import 'package:planeat_date_timeline/src/utils/utils.dart';
 import 'package:flutter/material.dart'
     show BoxDecoration, TextStyle, BorderRadius;
 
