@@ -59,6 +59,8 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
     this.timeLineProps = const EasyTimeLineProps(),
     this.dayProps = const EasyDayProps(),
     this.onDateChange,
+    this.verticalView = false,
+    this.verticalHeight,
     this.itemBuilder,
     this.activeColor,
     this.locale = "en_US",
@@ -103,6 +105,12 @@ class EasyInfiniteDateTimeLine extends StatefulWidget {
   /// Called when the selected date in the timeline changes.
   /// This function takes a `DateTime` object as its parameter, which represents the new selected date.
   final OnDateChangeCallBack? onDateChange;
+
+  /// Set the datetime widget to vertical view
+  final bool verticalView;
+
+  /// Set the datetime widget height for vertical view
+  final double? verticalHeight;
 
   /// > **NOTE:**
   /// > When utilizing the `itemBuilder`, it is essential to provide the width of each day for the date timeline widget.
@@ -211,6 +219,8 @@ class _EasyInfiniteDateTimeLineState extends State<EasyInfiniteDateTimeLine> {
           focusedDate: widget.focusDate,
           inactiveDates: widget.disabledDates,
           onDateChange: widget.onDateChange,
+          verticalView: widget.verticalView,
+          verticalHeight: widget.verticalHeight,
           timeLineProps: widget.timeLineProps,
           dayProps: widget.dayProps,
           showWeekends: widget.showWeekends,

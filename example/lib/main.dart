@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:example/examples/vertical_example.dart';
+import 'package:flutter/material.dart';
 
 import 'examples/simple_use_date_picker.dart';
 import 'examples/theming_example.dart';
@@ -51,6 +52,11 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 40),
+            VerticalExample(),
+            SizedBox(height: 40),
+            Divider(),
+            SizedBox(height: 40),
             SimpleUseExample(),
             ThemingExample(),
           ],

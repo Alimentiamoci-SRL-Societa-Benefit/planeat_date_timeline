@@ -17,6 +17,8 @@ class InfiniteTimeLineWidget extends StatefulWidget {
     this.locale = "en_US",
     this.timeLineProps = const EasyTimeLineProps(),
     this.onDateChange,
+    this.verticalView = false,
+    this.verticalHeight,
     this.showWeekends = true,
     this.itemBuilder,
     this.physics,
@@ -72,6 +74,12 @@ class InfiniteTimeLineWidget extends StatefulWidget {
   /// Called when the selected date in the timeline changes.
   /// This function takes a `DateTime` object as its parameter, which represents the new selected date.
   final OnDateChangeCallBack? onDateChange;
+
+  /// Determines if timeline is vertical or horizontal
+  final bool verticalView;
+
+  /// Determines the timeline vertical height for vertical view
+  final double? verticalHeight;
 
   /// Determines if showing weekend days or not
   final bool showWeekends;
@@ -195,12 +203,13 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTimeLineHeight = _isLandscapeMode ? _dayWidth : _dayHeight;
+    final effectiveTimeLineHeight = _calculateHeight();
     final effectiveTimeLineBackgroundColor = _timeLineProps.decoration == null
         ? _timeLineProps.backgroundColor
         : null;
     final effectiveTimeLineBorderRadius =
         _timeLineProps.decoration?.borderRadius ?? BorderRadius.zero;
+
     return Container(
       height: effectiveTimeLineHeight,
       margin: _timeLineProps.margin,
@@ -209,7 +218,8 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
       child: ClipRRect(
         borderRadius: effectiveTimeLineBorderRadius,
         child: CustomScrollView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection:
+              widget.verticalView ? Axis.vertical : Axis.horizontal,
           scrollBehavior: EasyCustomScrollBehavior(),
           controller: _controller,
           physics: widget.physics,
@@ -278,6 +288,14 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
     );
   }
 
+  double? _calculateHeight() {
+    if (widget.verticalView) {
+      return widget.verticalHeight ?? _dayHeight * 3;
+    }
+
+    return _isLandscapeMode ? _dayWidth : _dayHeight;
+  }
+
   /// The [context] is the build context.
   /// The [isSelected] indicates whether the day item is selected.
   /// The [date] is the date associated with the day item.
@@ -329,6 +347,7 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
         maxScrollExtent: _controller.position.maxScrollExtent,
         screenWidth: _controller.position.viewportDimension,
       );
+
       // Use a switch expression to determine the scroll offset based on the selection mode
       return switch (widget.selectionMode) {
         // If the selection mode is none or always first
@@ -349,6 +368,11 @@ class _InfiniteTimeLineWidgetState extends State<InfiniteTimeLineWidget> {
   /// The item extend value is calculated by adding the day height or day width (depending on the landscape mode)
   /// with the separator padding from the timeline properties.
   void _initItemExtend() {
+    if (widget.verticalView) {
+      _itemExtend = _dayHeight + _timeLineProps.separatorPadding;
+      return;
+    }
+
     _itemExtend = (_isLandscapeMode ? _dayHeight : _dayWidth) +
         _timeLineProps.separatorPadding;
   }
