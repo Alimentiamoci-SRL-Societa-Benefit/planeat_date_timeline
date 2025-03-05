@@ -73,7 +73,7 @@ abstract class EasyDateUtils {
     for (var i = 0; i <= endDate.difference(startDate).inDays; i++) {
       final date = startDate.add(Duration(days: i));
 
-      days.add(date);
+      days.add(DateTime(date.year, date.month, date.day));
     }
 
     if (!showWeekends) {
